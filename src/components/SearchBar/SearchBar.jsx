@@ -1,17 +1,32 @@
 import { Component } from 'react';
-import style from '../SearchBar.module.css';
+import style from './Searchbar.module.css';
 
-export class SearchBar extends Component {
+export class Searchbar extends Component {
+  state = {
+    searchQuery: '',
+  };
+  handleSubmit = event => {
+    event.preventDefault();
+    this.props.onSubmit(this.state.searchQuery);
+    this.setState({ searchQuery: '' });
+  };
+  handleChange = event => {
+    this.setState({ searchQuery: event.currentTarget.value.toLowerCase() });
+  };
+
   render() {
+    const { searchQuery } = this.state;
     return (
       <header className={style.searchbar}>
-        <form class="form">
-          <button type="submit" class="button">
-            <span class="button-label">Search</span>
+        <form className={style.form} onSubmit={this.handleSubmit}>
+          <button type="submit" className={style.button}>
+            <span className={style.button_label}>Search</span>
           </button>
 
           <input
-            class="input"
+            className={style.input}
+            onChange={this.handleChange}
+            value={searchQuery}
             type="text"
             autocomplete="off"
             autofocus
@@ -23,4 +38,4 @@ export class SearchBar extends Component {
   }
 }
 
-export default SearchBar;
+export default Searchbar;
