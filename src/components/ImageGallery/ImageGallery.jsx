@@ -9,25 +9,22 @@ export class ImageGallery extends Component {
   //   url: '',
   // };
 
-  // onShowModal = url => {
-  //   this.setState({ isShowModal: true, largeImageURL: url });
-  // };
-
   render() {
     const { images } = this.props;
     return (
-      <ul classNme={style.gallery} onClick={this.onShowModal}>
-        {images.map(
-          { id, webformatURL, largeImageURL, tags, onShowModal }(
-            <ImageGalleryItem
-              key={id}
-              src={webformatURL}
-              largeImage={largeImageURL}
-              alt={tags}
-              onShowModal={this.onShowModal}
-            />
-          )
-        )}
+      <ul
+        classNme={style.gallery}
+        // onClick={this.onShowModal}
+      >
+        {images.map(image => (
+          <ImageGalleryItem
+            key={image.id}
+            src={image.webformatURL}
+            // largeImage={image.largeImageURL}
+            alt={image.tags}
+            // onShowModal={this.onShowModal}
+          />
+        ))}
       </ul>
     );
   }

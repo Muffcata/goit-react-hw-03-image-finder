@@ -51,19 +51,19 @@ export class App extends Component {
     this.setState(oldState => ({
       images: [...oldState.images, ...images],
     }));
+  };
 
-    fetchImages = async () => {
-      this.setState({ isLoading: true });
-      const { searchQuery, page } = this.state;
-      try {
-        const images = await imageAPI.fetchImagesWithQuery(searchQuery, page);
-        this.addImg(images);
-      } catch (error) {
-        this.setState({ error });
-      } finally {
-        this.setState({ isLoading: false });
-      }
-    };
+  fetchImages = async () => {
+    this.setState({ isLoading: true });
+    const { searchQuery, page } = this.state;
+    try {
+      const images = await imageAPI.fetchImagesWithQuery(searchQuery, page);
+      this.addImg(images);
+    } catch (error) {
+      this.setState({ error });
+    } finally {
+      this.setState({ isLoading: false });
+    }
   };
 
   componentDidMount() {
@@ -83,9 +83,9 @@ export class App extends Component {
       console.log('nn');
     }
   };
-  handleShowModal = url => {
-    this.setState({ isShowModal: true });
-  };
+  // handleShowModal = url => {
+  //   this.setState({ isShowModal: true });
+  // };
 
   render() {
     const { images } = this.state;
@@ -93,10 +93,12 @@ export class App extends Component {
       <div className="image_App">
         <Searchbar onSubmit={this.handleFormSubmit} />
 
-        <ImageGallery images={images} onShowModal={this.handleShowModal} />
+        <ImageGallery
+          images={images}
+          // onShowModal={this.handleShowModal}
+        />
       </div>
     );
   }
 }
-
 export default App;
