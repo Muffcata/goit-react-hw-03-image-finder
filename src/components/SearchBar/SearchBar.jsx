@@ -8,7 +8,6 @@ export class Searchbar extends Component {
   handleSubmit = event => {
     event.preventDefault();
     this.props.onSubmit(this.state.searchQuery);
-    this.setState({ searchQuery: '' });
   };
   handleChange = event => {
     this.setState({ searchQuery: event.currentTarget.value.toLowerCase() });

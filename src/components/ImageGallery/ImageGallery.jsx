@@ -13,7 +13,7 @@ export class ImageGallery extends Component {
     const { images } = this.props;
     return (
       <ul
-        classNme={style.gallery}
+        className={style.gallery}
         // onClick={this.onShowModal}
       >
         {images.map(image => (
