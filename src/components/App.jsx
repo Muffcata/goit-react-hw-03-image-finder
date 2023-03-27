@@ -66,43 +66,49 @@ export class App extends Component {
     }
   };
 
-  // componentDidMount() {
-  //   this.fetchImages();
+  // componentDidUpdate(prevProps, oldState) {
+  //   const { searchQuery, page } = this.state;
+  //   if (oldState.searchQuery !== searchQuery || prevProps.page !== page) {
+  //     this.fetchImages(searchQuery, page);
+  //   }
   // }
-  componentDidUpdate(prevProps, oldState) {
-    const { searchQuery, page } = this.state;
-    if (oldState.searchQuery !== searchQuery || prevProps.page !== page) {
-      this.fetchImages(searchQuery, page);
-    }
-  }
 
   handleFormSubmit = searchQuery => {
     if (searchQuery !== this.state.searchQuery) {
       this.setState({ images: [], page: 1, searchQuery });
     }
+    this.fetchImages();
 
-    {
-      this.setState({
-        searchQuery,
-        isLoading: true,
-      });
-      this.fetchImages();
-      if (searchQuery && searchQuery.hits.length > 0) {
-        this.setState(() => {
-          return {
-            images: [...this.state.images, ...searchQuery.hits],
-            page: this.state.page + 1,
-            isLoading: false,
-          };
-        });
-      } else {
-        console.log('Sorry');
-        this.setState({
-          imagges: [],
-        });
-      }
-    }
+    // this.setState(() => {
+    //   return {
+    //     images: [...this.state.images, ...searchQuery.hits],
+    //     page: this.state.page + 1,
+    //     isLoading: false,
+    //   };
+    // });
   };
+  // {
+  //   this.setState({
+  //     searchQuery,
+  //     isLoading: true,
+  //   });
+  // this.fetchImages();
+  // if (searchQuery && searchQuery.hits.length > 0) {
+  //   this.setState(() => {
+  //     return {
+  //       images: [...this.state.images, ...searchQuery.hits],
+  //       page: this.state.page + 1,
+  //       isLoading: false,
+  //     };
+  //   });
+  // } else {
+  //   console.log('Sorry');
+  //   this.setState({
+  //     images: [],
+  //   });
+  // }
+  //   }
+  // };
   // handleShowModal = url => {
   //   this.setState({ isShowModal: true });
   // };
