@@ -1,12 +1,13 @@
 import { Component } from 'react';
-import style from '.Modal.module.css';
+import style from './Modal.module.css';
 
 export class Modal extends Component {
   render() {
+    const { picture } = this.props;
     return (
-      <div class="overlay">
-        <div class="modal">
-          <img src="" alt="" />
+      <div className={style.overlay}>
+        <div className={style.modal}>
+          <img src={picture} alt="Something" />
         </div>
       </div>
     );

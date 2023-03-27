@@ -7,7 +7,7 @@ export class Searchbar extends Component {
   };
   handleSubmit = event => {
     event.preventDefault();
-    console.log(event);
+
     this.props.onSubmit(this.state.searchQuery);
   };
   handleChange = event => {

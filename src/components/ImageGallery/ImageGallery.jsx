@@ -3,26 +3,17 @@ import ImageGalleryItem from 'components/ImageGalleryItem/ImageGalleryItem';
 import style from './ImageGallery.module.css';
 
 export class ImageGallery extends Component {
-  // state = {
-  //   isShowModal: false,
-  //   items: [],
-  //   url: '',
-  // };
-
   render() {
-    const { images } = this.props;
+    const { images, showLargeImage } = this.props;
     return (
-      <ul
-        className={style.gallery}
-        // onClick={this.onShowModal}
-      >
+      <ul className={style.gallery}>
         {images.map(image => (
           <ImageGalleryItem
             key={image.id}
             src={image.webformatURL}
-            // largeImage={image.largeImageURL}
+            largeImageURL={image.largeImageURL}
             alt={image.tags}
-            // onShowModal={this.onShowModal}
+            showLargeImage={showLargeImage}
           />
         ))}
       </ul>
