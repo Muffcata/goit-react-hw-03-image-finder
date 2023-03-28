@@ -65,7 +65,13 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleFormSubmit} />
         {isLoading && <Loader />}
         <ImageGallery images={images} showLargeImage={this.showLargeImage} />
-        {images.length > 0 && <Button onClick={this.handleLoadMore} />}
+        {images.length < 1 ? (
+          <></>
+        ) : images.length < 12 ? (
+          <> That's all</>
+        ) : (
+          <Button onClick={this.handleLoadMore} />
+        )}
 
         {isShowModal && (
           <Modal
