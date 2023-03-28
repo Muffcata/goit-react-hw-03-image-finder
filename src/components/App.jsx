@@ -1,7 +1,7 @@
 import { Component } from 'react';
 import imageAPI from './services/pixabayAPI';
 import ImageGallery from './ImageGallery/ImageGallery';
-import Searchbar from './Searchbar/Searchbar';
+import SearchBar from './SearchBar/SearchBar';
 import Loader from './Loader/Loader';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
@@ -62,7 +62,7 @@ export class App extends Component {
     const { images, largeImageURL, isLoading, isShowModal } = this.state;
     return (
       <div className="image_App">
-        <Searchbar onSubmit={this.handleFormSubmit} />
+        <SearchBar onSubmit={this.handleFormSubmit} />
         {isLoading && <Loader />}
         <ImageGallery images={images} showLargeImage={this.showLargeImage} />
         {images.length < 1 ? (
