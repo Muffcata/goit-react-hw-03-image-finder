@@ -3,7 +3,7 @@ import imageAPI from './services/pixabayAPI';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Searchbar from './Searchbar/Searchbar';
 // import Loader from './Loader/Loader';
-// import Button from './Button/Button';
+import Button from './Button/Button';
 import Modal from './Modal/Modal';
 
 export class App extends Component {
@@ -34,6 +34,15 @@ export class App extends Component {
       this.setState({ isLoading: false });
     }
   };
+  handleLoadMore = e => {
+    const { searchQuery, page, images } = this.state;
+    e.preventDefault();
+    this.fetchImages(searchQuery, page);
+    this.setState({
+      images: [...this.state.images, ...images],
+      page: page + 1,
+    });
+  };
 
   handleFormSubmit = searchQuery => {
     if (searchQuery !== this.state.searchQuery) {
@@ -41,11 +50,6 @@ export class App extends Component {
     }
     this.fetchImages(searchQuery, 1);
   };
-
-  // handleLoadMore = event => {
-  //   event.preventDefault();
-  //   this.props.onSubmit(this.state.searchQuery);
-  // };
 
   showLargeImage = url => {
     this.setState({ isShowModal: true, largeImageURL: url });
@@ -59,8 +63,10 @@ export class App extends Component {
     return (
       <div className="image_App">
         <Searchbar onSubmit={this.handleFormSubmit} />
-        {/* <Button onClick={this.handleLoadMore} /> */}
+
         <ImageGallery images={images} showLargeImage={this.showLargeImage} />
+        {images.length > 0 && <Button onClick={this.handleLoadMore} />}
+
         {this.state.isShowModal && (
           <Modal
             closeLargeImage={this.closeLargeImage}
