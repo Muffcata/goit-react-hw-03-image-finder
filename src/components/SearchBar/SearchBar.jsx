@@ -25,7 +25,6 @@ export class Searchbar extends Component {
 
           <input
             className={style.input}
-            id="icon-search"
             onChange={this.handleChange}
             value={searchQuery}
             type="text"
