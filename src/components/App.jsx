@@ -50,6 +50,9 @@ export class App extends Component {
   showLargeImage = url => {
     this.setState({ isShowModal: true, largeImageURL: url });
   };
+  closeLargeImage = () => {
+    this.setState({ isShowModal: false, largeImageURL: '' });
+  };
 
   render() {
     const { images, largeImageURL } = this.state;
@@ -58,7 +61,12 @@ export class App extends Component {
         <Searchbar onSubmit={this.handleFormSubmit} />
         {/* <Button onClick={this.handleLoadMore} /> */}
         <ImageGallery images={images} showLargeImage={this.showLargeImage} />
-        {this.state.isShowModal && <Modal picture={largeImageURL} />}
+        {this.state.isShowModal && (
+          <Modal
+            closeLargeImage={this.closeLargeImage}
+            picture={largeImageURL}
+          />
+        )}
       </div>
     );
   }
