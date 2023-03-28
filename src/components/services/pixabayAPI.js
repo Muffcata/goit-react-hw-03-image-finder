@@ -12,7 +12,7 @@ const fetchImagesWithQuery = async (searchQuery, page = 1) => {
       per_page: 12,
     },
   });
-  console.log(response.data.hits);
+
   return response.data.hits;
 };
 

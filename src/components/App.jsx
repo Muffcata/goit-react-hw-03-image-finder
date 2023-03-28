@@ -2,7 +2,7 @@ import { Component } from 'react';
 import imageAPI from './services/pixabayAPI';
 import ImageGallery from './ImageGallery/ImageGallery';
 import Searchbar from './Searchbar/Searchbar';
-// import Loader from './Loader/Loader';
+import Loader from './Loader/Loader';
 import Button from './Button/Button';
 import Modal from './Modal/Modal';
 
@@ -35,18 +35,18 @@ export class App extends Component {
     }
   };
   handleLoadMore = e => {
-    const { searchQuery, page, images } = this.state;
+    const { searchQuery, page } = this.state;
     e.preventDefault();
-    this.fetchImages(searchQuery, page);
+    const newPage = page + 1;
+    this.fetchImages(searchQuery, newPage);
     this.setState({
-      images: [...this.state.images, ...images],
-      page: page + 1,
+      page: newPage,
     });
   };
 
   handleFormSubmit = searchQuery => {
     if (searchQuery !== this.state.searchQuery) {
-      this.setState({ images: [], page: 1, searchQuery });
+      this.setState({ images: [], page: 1, searchQuery, isLoading: true });
     }
     this.fetchImages(searchQuery, 1);
   };
@@ -59,15 +59,15 @@ export class App extends Component {
   };
 
   render() {
-    const { images, largeImageURL } = this.state;
+    const { images, largeImageURL, isLoading, isShowModal } = this.state;
     return (
       <div className="image_App">
         <Searchbar onSubmit={this.handleFormSubmit} />
-
+        {isLoading && <Loader />}
         <ImageGallery images={images} showLargeImage={this.showLargeImage} />
         {images.length > 0 && <Button onClick={this.handleLoadMore} />}
 
-        {this.state.isShowModal && (
+        {isShowModal && (
           <Modal
             closeLargeImage={this.closeLargeImage}
             picture={largeImageURL}
