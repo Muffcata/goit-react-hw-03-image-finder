@@ -68,7 +68,7 @@ export class App extends Component {
         {images.length < 1 ? (
           <></>
         ) : images.length < 12 ? (
-          <> That's all</>
+          <> That's all results</>
         ) : (
           <Button onClick={this.handleLoadMore} />
         )}
